@@ -18,7 +18,7 @@ router.post('/webhook', (req, res, next) => {
 
   res.status(200).json({ message: "Success!" });
   // console.log(req.headers["x-line-signature"])
-  console.log(req.body)
+  console.log(req.body.events[0].message)
 
   req.body.events.forEach(element => {
 
