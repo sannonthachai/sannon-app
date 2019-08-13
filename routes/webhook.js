@@ -12,12 +12,14 @@ router.post('/webhook', middleware.compareSignature, (req, res) => {
     // console.log(JSON.stringify(element.replyToken))
     if (element.message.text == "Hello") {
       let options = new optionsClass(element.replyToken, "Hi Guys")
-      
+      request(options)
+    }
+    else if (element.message.text == "How are you doing") {
+      let options = new optionsClass(element.replyToken, "Fine")
       request(options)
     }
     else {
-      let options = new optionsClass(element.replyToken, "Hello, user")
-
+      let options = new optionsClass(element.replyToken, "Have a nice day")
       request(options, (error, res) => {
         if (!error && res.statusCode == 200) {
           console.log(element.message)
