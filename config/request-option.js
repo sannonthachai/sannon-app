@@ -1,6 +1,6 @@
 class options {
 
-    constructor(replyToken) {
+    constructor(replyToken, text) {
         this.uri = 'https://api.line.me/v2/bot/message/reply'
         this.method = 'POST'
         this.headers = {
@@ -9,10 +9,10 @@ class options {
         }
         this.json = {
           "replyToken": this.replyToken = replyToken,
-          "messages":[
+          "messages": [
               {
-                  "type":"text",
-                  "text":"Hello, user"
+                  "type": "text",
+                  "text": this.text = text
               }
           ]
         }
