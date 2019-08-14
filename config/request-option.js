@@ -20,3 +20,28 @@ class options {
 }
 
 module.exports = options
+
+// const request = require('request')
+
+// class LineReplyAPI {
+//   url = ""
+//   headers = {}
+//   constructor() {
+//     this.uri = "https://api.line.me/v2/bot/message/reply"
+//     this.headers = { "content-type": "application/json" }
+//   }
+
+//   postTextReply = async (body, token) => {
+
+//     return request
+//       .post(url)
+//       .on('error', function(err) {
+//         console.error(err)
+//       })
+//   }
+
+//   postQuickReply = async () => {
+//     return
+//   }
+  
+// }
