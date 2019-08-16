@@ -5,6 +5,10 @@ const optionsClass = require('../config/request-option')
 const middleware = require('../middleware/signature-middleware')
 const ReplyModel = require('../models/reply-line-apli-model')
 
+// Database ========================================================================
+const db = client.db('Line')
+const collection = db.collection('reply-line-api')
+
 /* GET users listing. */
 router.post('/webhook', middleware.compareSignature, (req, res) => {
   // res.status(200).json({ message: "Success!" });
