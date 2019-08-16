@@ -3,6 +3,7 @@ const router = express.Router();
 const request = require('request')
 const optionsClass = require('../config/request-option')
 const middleware = require('../middleware/signature-middleware')
+const ReplyModel = require('../models/reply-line-apli-model')
 
 /* GET users listing. */
 router.post('/webhook', middleware.compareSignature, (req, res) => {
