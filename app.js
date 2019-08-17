@@ -1,18 +1,14 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const mongo = require('mongodb').MongoClient
 const mongoose = require('mongoose')
 const app = express();
 
 // Connect Database ================================================================
 const db = require('./config/keys-database')
-mongo.connect(db.mongoURI, db.mongo)
+mongoose.connect(db.mongoURI,db.setMongoose)
         .then(() => console.log('MongoDB Connected'))
         .catch(err => console.log(err))
-// mongoose.connect(db.mongoURI,db.set)
-//         .then(() => console.log('MongoDB Connected'))
-//         .catch(err => console.log(err))
 
 // Set up our express application ==================================================
 app.use(bodyParser.json());
