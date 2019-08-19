@@ -28,7 +28,9 @@ class ReplyTextMessages {
 
   replyText(replyToken, textMessage) {
     let options = new RequestAPIOptions(replyToken, textMessage)
-    request(options)
+    request(options, (error, response, body) => {
+      console.log(body)
+    })
   }
 }
 
