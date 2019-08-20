@@ -1,6 +1,6 @@
 const request = require('request')
 
-class ReplyTextMessages {
+class TextMessages {
 
   constructor(replyToken, textMessage) {
       this.url = 'https://api.line.me/v2/bot/message/reply'
@@ -32,4 +32,4 @@ class ReplyTextMessages {
   }
 }
 
-module.exports = ReplyTextMessages
+module.exports = TextMessages

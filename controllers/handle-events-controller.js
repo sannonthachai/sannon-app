@@ -1,5 +1,5 @@
-const ReplyTextModel = require('../models/reply-line-apli-model')
-const ReplyTextService = require('../services/reply-text-service')
+const TextMessagesModel = require('../models/text-messages-model')
+const TextMessagesService = require('../services/reply-text-service')
 
 module.exports = {
     replyMessages: async (req, res) => {
@@ -9,14 +9,14 @@ module.exports = {
             textMessage = element.message.text
         })
 
-        let reply = await ReplyTextModel.findOne({ ask: textMessage })
+        let reply = await TextMessagesModel.findOne({ ask: textMessage })
 
         if (reply !== null) {
-            let message = new ReplyTextService(replyToken, reply.ans)
+            let message = new TextMessagesService(replyToken, reply.ans)
             message.replyText()
         }
         else {
-            let message = new ReplyTextService(replyToken, "What are you looking for?")
+            let message = new TextMessagesService(replyToken, "What are you looking for?")
             message.replyText()
         }
     }
