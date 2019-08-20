@@ -24,8 +24,10 @@ class ReplyTextMessages {
       headers: this.headers,
       url: this.url,
       json: this.json
-    }, (error, response, body) => {
-      console.log(body)
+    }, (error, res) => {
+      if (res.statusCode !== 200) {
+        throw new Error('Invalid format by status code ' + res.statusCode)
+      }
     })
   }
 }

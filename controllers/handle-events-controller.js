@@ -1,5 +1,5 @@
 const ReplyTextModel = require('../models/reply-line-apli-model')
-const ReplyTextService = require('../services/line-reply-api-service')
+const ReplyTextService = require('../services/reply-text-service')
 
 module.exports = {
     replyMessages: async (req, res) => {
