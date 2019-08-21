@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 
 const replySchema = mongoose.Schema({
-    ask: {
-        type: String
-    },
-    ans: {
-        type: String
-    }
+    ask: String,
+    ans: [String]
+
 })
 
 module.exports = mongoose.model('ReplyTextModel', replySchema)

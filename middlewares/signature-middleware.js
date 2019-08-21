@@ -7,7 +7,7 @@ module.exports = {
         const body = JSON.stringify(req.body)
         const signature = crypto.createHmac('SHA256', channelSecret).update(body).digest('base64')
 
-        if (req.headers["x-line-signature"] !== signature) {
+        if(req.headers["x-line-signature"] !== signature) {
             return res.status(500)
         }
         else {

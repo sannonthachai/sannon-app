@@ -11,12 +11,14 @@ module.exports = {
 
         let reply = await TextMessagesModel.findOne({ ask: textMessage })
 
-        if (reply !== null) {
-            let message = new TextMessagesService(replyToken, reply.ans)
+        if(reply !== null) {
+            let message = new TextMessagesService(replyToken)
+            message.pushMessage(reply.ans)
             message.replyText()
         }
         else {
-            let message = new TextMessagesService(replyToken, "What are you looking for?")
+            let message = new TextMessagesService(replyToken)
+            message.pushMessage(["What are you looking for ?"])
             message.replyText()
         }
     }
