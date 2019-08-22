@@ -17,7 +17,9 @@ app.use(cookieParser())
 
 // Set Router ======================================================================
 const webhook = require('./routes/webhook');
+const scrape = require('./routes/scrape')
 app.use('/sannon-app/line/api', webhook);
+app.use('/sannon-app/scrape', scrape);
 
 // Connect Port ====================================================================
 const PORT = process.env.PORT || 3000
