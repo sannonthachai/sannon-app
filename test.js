@@ -1,11 +1,8 @@
-class RequestForm {
+const request = require('request')
+
+class RequestBody {
 
   constructor(replyToken) {
-      this.url = 'https://api.line.me/v2/bot/message/reply'
-      this.headers = {
-        "content-type": "application/json",
-        "Authorization": "Bearer J4U6/4wBRF+q4Iwb5PwAKHKzm+auvDH/hpjI52b7NuNa127ZrzWJ4ELBHeCXzSyDA8S5Dvkduvj7rE7FnrQDTZyOXaro/+X4uct4kVgXDPCxheaKAsZR8EMNpvBoEUPRVMRkDAUjW1PPFIa4Gpmm6gdB04t89/1O/w1cDnyilFU="
-      }
       this.data = []
       this.json = {
         "replyToken": this.replyToken = replyToken,
@@ -24,16 +21,30 @@ class RequestForm {
   }
 }
 
-class ReplyAnswer {    
-    constructor(replyToken) {
-        this.options = new RequestForm(replyToken)
+class Messages {    
+    constructor() {
+      this.url = 'https://api.line.me/v2/bot/message/reply'
+      this.headers = {
+        "content-type": "application/json",
+        "Authorization": "Bearer J4U6/4wBRF+q4Iwb5PwAKHKzm+auvDH/hpjI52b7NuNa127ZrzWJ4ELBHeCXzSyDA8S5Dvkduvj7rE7FnrQDTZyOXaro/+X4uct4kVgXDPCxheaKAsZR8EMNpvBoEUPRVMRkDAUjW1PPFIa4Gpmm6gdB04t89/1O/w1cDnyilFU="
+      }
     }
 
-    replyText(replyAns) {
-        this.options.pushMessage(replyAns)
-        console.log(this.options.json)
+    replyMessages(replyToken, replyAns) {
+      let options = new RequestBody(replyToken)
+      options.pushMessage(replyAns)
+
+      request.post({
+        headers: this.headers,
+        url: this.url,
+        json: options.json
+      }, (error, res) => {
+        if(res.statusCode !== 200) {
+          console.log("Error with code " + res.statusCode)
+        }
+      })
     }
 }
 
-let reply = new ReplyAnswer("5555555555")
-reply.replyText(["FUCK","123"])
+let reply = new Messages()
+reply.replyMessages("5555555555",["FUCK","123"])
