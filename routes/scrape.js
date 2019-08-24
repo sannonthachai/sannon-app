@@ -29,7 +29,7 @@ router.get('/update', async (req,res) => {
         lastThreeDigits.push(($(elem).text()))
     })
 
-    let updateFirstPrize = await TextMessagesModel.updateOne({ ask: 'เลขหน้า 3 ตัว' }, { $set: { ans: firstThreeDigits }, $currentDate: { lastModified: true } })
+    let updateFirstPrize = await TextMessagesModel.updateOne({ ask: 'รางวัลที่ 1' }, { $set: { ans: firstPrize }, $currentDate: { lastModified: true } })
     let updateLastTwoDigits = await TextMessagesModel.updateOne({ ask: 'เลขท้าย 2 ตัว' }, { $set: { ans: lastTwoDigits }, $currentDate: { lastModified: true } })
     let updateFirstThreeDigits = await TextMessagesModel.updateOne({ ask: 'เลขหน้า 3 ตัว' }, { $set: { ans: firstThreeDigits }, $currentDate: { lastModified: true } })
     let updateLastThreeDigits = await TextMessagesModel.updateOne({ ask: 'เลขท้าย 3 ตัว' }, { $set: { ans: lastThreeDigits }, $currentDate: { lastModified: true } })
