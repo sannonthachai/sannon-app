@@ -1,5 +1,5 @@
 const TextMessagesModel = require('../models/text-messages-model')
-const TextMessagesService = require('../services/reply-text-service')
+const MessagesService = require('../services/reply-messages-service')
 
 module.exports = {
     replyMessages: async (req, res) => {
@@ -12,14 +12,13 @@ module.exports = {
         let reply = await TextMessagesModel.findOne({ ask: textMessage })
 
         if(reply !== null) {
-            let message = new TextMessagesService(replyToken)
-            message.pushMessage(reply.ans)
-            message.replyText()
+            let message = new MessagesService()
+            message.replyMessages(replyToken, reply.ans)
         }
         else {
-            let message = new TextMessagesService(replyToken)
-            message.pushMessage(["What are you looking for ?"])
-            message.replyText()
+            let ans = ["What are you looking for ?"]
+            let message = new MessagesService()
+            message.replyMessages(replyToken, ans)
         }
     }
 }
