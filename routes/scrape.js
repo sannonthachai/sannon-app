@@ -12,7 +12,7 @@ router.get('/update', async (req,res) => {
     const lastThreeDigits = []
 
     try {
-        htmlString = await rp.get('https://news.sanook.com/lotto/')
+        htmlString = await rp.get('https://news.sanook.com/lotto/check/01092562/')
     }
     catch (err) {
         console.log(err)
@@ -20,19 +20,19 @@ router.get('/update', async (req,res) => {
     
     const $ = cheerio.load(htmlString)
 
-    firstPrize.push($('#lotto-highlight-result > span:nth-child(1) > strong').text())
-    lastTwoDigits.push($('#lotto-highlight-result > span:nth-child(4) > strong').text())
-    $('#lotto-highlight-result > span:nth-child(2) > b').each((i, elem) => {
+    firstPrize.push($('#contentPrint > div.lottocheck__resize > div.lottocheck__sec.lottocheck__sec--bdnone > div.lottocheck__table > div:nth-child(1) > strong').text())
+    lastTwoDigits.push($('#contentPrint > div.lottocheck__resize > div.lottocheck__sec.lottocheck__sec--bdnone > div.lottocheck__table > div:nth-child(4) > strong').text())
+    $('#contentPrint > div.lottocheck__resize > div.lottocheck__sec.lottocheck__sec--bdnone > div.lottocheck__table > div:nth-child(2) > strong').each((i, elem) => {
         firstThreeDigits.push(($(elem).text()))
     })
-    $('#lotto-highlight-result > span:nth-child(3) > b').each((i, elem) => {
+    $('#contentPrint > div.lottocheck__resize > div.lottocheck__sec.lottocheck__sec--bdnone > div.lottocheck__table > div:nth-child(3) > strong').each((i, elem) => {
         lastThreeDigits.push(($(elem).text()))
     })
 
-    let updateFirstPrize = await TextMessagesModel.updateOne({ ask: 'รางวัลที่ 1' }, { $set: { ans: firstPrize }, $currentDate: { lastModified: true } })
-    let updateLastTwoDigits = await TextMessagesModel.updateOne({ ask: 'เลขท้าย 2 ตัว' }, { $set: { ans: lastTwoDigits }, $currentDate: { lastModified: true } })
-    let updateFirstThreeDigits = await TextMessagesModel.updateOne({ ask: 'เลขหน้า 3 ตัว' }, { $set: { ans: firstThreeDigits }, $currentDate: { lastModified: true } })
-    let updateLastThreeDigits = await TextMessagesModel.updateOne({ ask: 'เลขท้าย 3 ตัว' }, { $set: { ans: lastThreeDigits }, $currentDate: { lastModified: true } })
+    await TextMessagesModel.updateOne({ ask: 'รางวัลที่ 1' }, { $set: { ans: firstPrize }, $currentDate: { lastModified: true } })
+    await TextMessagesModel.updateOne({ ask: 'เลขท้าย 2 ตัว' }, { $set: { ans: lastTwoDigits }, $currentDate: { lastModified: true } })
+    await TextMessagesModel.updateOne({ ask: 'เลขหน้า 3 ตัว' }, { $set: { ans: firstThreeDigits }, $currentDate: { lastModified: true } })
+    await TextMessagesModel.updateOne({ ask: 'เลขท้าย 3 ตัว' }, { $set: { ans: lastThreeDigits }, $currentDate: { lastModified: true } })
 
     return res.json("UPDATE COMPLETE!")
 })
