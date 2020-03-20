@@ -5,6 +5,7 @@ module.exports = {
     replyMessages: async (req, res) => {
 
         req.body.events.forEach(async (element) => {
+            console.log(element.source)
             replyToken = element.replyToken
             textMessage = element.message.text
         })
